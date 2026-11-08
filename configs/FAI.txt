@@ -1,0 +1,20 @@
+! ============================================================
+! FAI - Routeur Cisco 2911 (fournisseur d'acces Internet simule)
+! G0/0 -> R1 (203.0.113.0/30) ; G0/1 -> serveur Internet 8.8.8.8
+! Configuration a coller dans le CLI (mode enable)
+! ============================================================
+enable
+configure terminal
+hostname FAI
+interface g0/0
+ ip address 203.0.113.1 255.255.255.252
+ no shutdown
+interface g0/1
+ ip address 8.8.8.1 255.255.255.0
+ no shutdown
+end
+write memory
+
+! Serveur Internet (Server-PT) : IP 8.8.8.8 / masque 255.255.255.0 / passerelle 8.8.8.1
+! Verification :
+! show ip interface brief

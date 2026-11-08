@@ -1,0 +1,37 @@
+! ============================================================
+! SW1 - Switch Cisco 2960-24TT
+! VLAN 10 COMPTA / VLAN 20 INFO / VLAN 30 DIRECTION
+! Trunk 802.1Q vers R1 sur Fa0/24
+! Configuration a coller dans le CLI (mode enable)
+! ============================================================
+enable
+configure terminal
+hostname SW1
+vlan 10
+ name COMPTA
+vlan 20
+ name INFO
+vlan 30
+ name DIRECTION
+exit
+interface range fa0/1-2
+ switchport mode access
+ switchport access vlan 10
+interface range fa0/3-4
+ switchport mode access
+ switchport access vlan 20
+interface fa0/10
+ switchport mode access
+ switchport access vlan 20
+interface range fa0/5-6
+ switchport mode access
+ switchport access vlan 30
+interface fa0/24
+ switchport mode trunk
+end
+write memory
+
+! Verifications :
+! show vlan brief
+! show interfaces trunk
+! show ip interface brief
